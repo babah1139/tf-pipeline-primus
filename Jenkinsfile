@@ -27,6 +27,11 @@ pipeline {
      }
 
      stage('Destroy everything'){
+        environment{
+            AWS_ACCESS_KEY = credentials("aws-access-keys") // this will be used in future versions of Terraform to authenticate
+            AWS_SECRET_ACCESS_KEY = credentials("secret-access-key")
+        
+        }
         steps{
             sh "terraform destroy --auto-approve"
         }
